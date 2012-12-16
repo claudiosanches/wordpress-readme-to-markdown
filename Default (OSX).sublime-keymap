@@ -1,0 +1,3 @@
+[
+    { "keys": ["ctrl+super+k"], "command": "wordpress_readme_to_markdown" }
+]
