@@ -27,14 +27,14 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
         """
         Adds link to screenshots
         """
-        find = re.compile('''== Screenshots ==(.*?)==''', re.MULTILINE|re.DOTALL)
+        find = re.compile("""== Screenshots ==(.*?)==""", re.MULTILINE|re.DOTALL)
 
         images = find.search(content)
 
         if images:
-            for index,line in enumerate(images.group(1).strip().split("""\n""")):
+            for index, line in enumerate(images.group(1).strip().split("""\n""")):
                 content = content.replace(line, \
-                    """### %(name)s ###\n![%(name)s](http://s.wordpress.org/extend/plugins/%(slug)s/screenshot-%(index)s.png)\n"""\
+                    """### %(name)s ###\n![%(name)s](http://s.wordpress.org/extend/plugins/%(slug)s/screenshot-%(index)s.png)\n""" \
                     % {"name": line, "slug": slug, "index": index + 1})
 
         return content
