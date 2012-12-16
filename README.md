@@ -4,9 +4,9 @@ Convert WordPress plugin readme files to markdown.
 
 ## Features ##
 
-* Converts headings
-* Formats contributors, donate link, etc.
-* Inserts screenshots
+* Converts headings;
+* Formats contributors, donate link, etc;
+* Inserts screenshots.
 
 ## Usage ##
 
@@ -20,5 +20,5 @@ Inspired by [WP-Readme-to-Github-Markdown](https://github.com/benbalter/WP-Readm
 
 ## License ##
 
-Licensed under the MIT license.
+Licensed under the MIT license.  
 [License text](http://opensource.org/licenses/mit-license.php)
