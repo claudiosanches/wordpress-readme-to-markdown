@@ -39,6 +39,20 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
 
         return content
 
+    def parseInformation(self, content):
+        """
+        Parse Information section
+        """
+        find = re.compile("""=== (.+) ===(.*?)==""", re.MULTILINE|re.DOTALL)
+
+        infos = find.search(content)
+
+        for info in infos.group(2).strip().split("""\n"""):
+            string = self.replaceAll("""^([^:\n#]+): (.+)$""", """**\\1:** \\2  """, info)
+            content = content.replace(info, string)
+
+        return content
+
     def run(self, edit):
         # Get current file path
         oldFile = self.view.file_name()
@@ -58,15 +72,16 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
             # Gets the plugin slug
             slug = self.getPluginSlug(content)
 
+            # Customizes the informations session
+            content = self.parseInformation(content)
+
+            # Parse Screenshots
             content = self.parseScreenshots(content, slug)
 
             # Replaces the headings
             content = self.replaceAll("""^(===)+(.+)+(===)\n""", """#\\2#\n""", content)
             content = self.replaceAll("""^(==)+(.+)+(==)\n""", """##\\2##\n""", content)
             content = self.replaceAll("""^(=)+(.+)+(=)\n""", """###\\2###\n""", content)
-
-            # Customizes the informations session
-            content = self.replaceAll("""^([^:\n#]+): (.+)$""", """**\\1:** \\2  """, content)
 
             getContent.close()
 
