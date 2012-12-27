@@ -21,13 +21,13 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
     def __init__(self, *args, **kwargs):
         super(WordpressReadmeToMarkdownCommand, self).__init__(*args, **kwargs) # Calls the parent constructor to maintain compatibilty
         #Dictionary of replaces
-        titles = {
-                    """^(===)+(.+)+(===)\n""":"""#\\2#\n""",
-                    """^(==)+(.+)+(==)\n""":"""##\\2##\n""",
-                    """^(=)+(.+)+(=)\n""":"""###\\2###\n"""
+        titles = [
+                    ["""^(===)+(.+)+(===)\n""","""#\\2#\n"""],
+                    ["""^(==)+(.+)+(==)\n""","""##\\2##\n"""],
+                    ["""^(=)+(.+)+(=)\n""","""###\\2###\n"""]
         }
         self.titles = []
-        for search, replace in titles.iteritems():
+        for search, replace in titles:
             #Compiles the Expression    
             reg = re.compile(search,re.MULTILINE)
             
