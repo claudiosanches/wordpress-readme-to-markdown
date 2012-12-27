@@ -25,7 +25,6 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
                     ["""^(===)+(.+)+(===)\n""","""#\\2#\n"""],
                     ["""^(==)+(.+)+(==)\n""","""##\\2##\n"""],
                     ["""^(=)+(.+)+(=)\n""","""###\\2###\n"""]
-        }
         self.titles = []
         for search, replace in titles:
             #Compiles the Expression    
