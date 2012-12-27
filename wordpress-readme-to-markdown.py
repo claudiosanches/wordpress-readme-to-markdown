@@ -44,7 +44,7 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
             reg = re.compile(search,re.MULTILINE)
             
             #Saves a partial object with call to re.sub preparatted
-            self.titles[search] = partial(find.sub, replace)
+            self.other_replaces[search] = partial(reg.sub, replace)
             
         #Compile and save the regex
         self.plugin_slug = re.compile("""^=== (.+) ===\n""") 
