@@ -6,50 +6,56 @@ import re
 try:
     from functools import partial
 except ImportError:
-    #fallback to <2.5
+    # fallback to < 2.5
     def partial(func, *args, **keywords):
         def newfunc(*fargs, **fkeywords):
             newkeywords = keywords.copy()
             newkeywords.update(fkeywords)
             return func(*(args + fargs), **newkeywords)
+
         newfunc.func = func
         newfunc.args = args
         newfunc.keywords = keywords
         newfunc.__name__ = func.__name__
         return newfunc
+
 class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
     def __init__(self, *args, **kwargs):
         super(WordpressReadmeToMarkdownCommand, self).__init__(*args, **kwargs) # Calls the parent constructor to maintain compatibilty
-        #Dictionary of replaces
+        # Dictionary of replaces
         titles = [
-                    ["""^(===)+(.+)+(===)\n""","""#\\2#\n"""],
-                    ["""^(==)+(.+)+(==)\n""","""##\\2##\n"""],
-                    ["""^(=)+(.+)+(=)\n""","""###\\2###\n"""]
+            ["""^(===)+(.+)+(===)\n""","""#\\2#\n"""],
+            ["""^(==)+(.+)+(==)\n""","""##\\2##\n"""],
+            ["""^(=)+(.+)+(=)\n""","""###\\2###\n"""]
+        ]
+
         self.titles = []
+
         for search, replace in titles:
-            #Compiles the Expression    
+            # Compiles the Expression
             reg = re.compile(search,re.MULTILINE)
-            
-            #Saves a partial object with call to re.sub preparatted
-            self.titles.append(partial(reg.sub, replace)) 
-        
+
+            # Saves a partial object with call to re.sub preparatted
+            self.titles.append(partial(reg.sub, replace))
+
         other_replaces = {
             """^([^:\n#]+): (.+)$""": """**\\1:** \\2  """
         }
-        
+
         self.other_replaces = {}
         for search, replace in other_replaces.iteritems():
-            #Compiles the Expression    
+            # Compiles the Expression
             reg = re.compile(search,re.MULTILINE)
-            
-            #Saves a partial object with call to re.sub preparatted
+
+            # Saves a partial object with call to re.sub preparatted
             self.other_replaces[search] = partial(reg.sub, replace)
-            
-        #Compile and save the regex
-        self.plugin_slug = re.compile("""^=== (.+) ===\n""") 
+
+        # Compile and save the regex
+        self.plugin_slug = re.compile("""^=== (.+) ===\n""")
         self.plugin_screenshot = re.compile("""== Screenshots ==(.*?)==""", re.MULTILINE|re.DOTALL)
         self.plugin_information = re.compile("""=== (.+) ===(.*?)==""", re.MULTILINE|re.DOTALL)
         self.plugin_readme = re.compile("""(.+)/readme.txt$""")
+
     def getPluginSlug(self, content):
         """
         Gets the plugin slug
