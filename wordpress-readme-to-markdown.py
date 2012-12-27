@@ -32,7 +32,7 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
             reg = re.compile(search,re.MULTILINE)
             
             #Saves a partial object with call to re.sub preparatted
-            self.titles.append(partial(find.sub, replace)) 
+            self.titles.append(partial(reg.sub, replace)) 
         
         other_replaces = {
             """^([^:\n#]+): (.+)$""": """**\\1:** \\2  """
