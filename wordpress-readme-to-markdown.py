@@ -3,22 +3,58 @@ import sublime_plugin
 import os
 import shutil
 import re
-
+try:
+    from functools import partial
+except ImportError:
+    #fallback to <2.5
+    def partial(func, *args, **keywords):
+        def newfunc(*fargs, **fkeywords):
+            newkeywords = keywords.copy()
+            newkeywords.update(fkeywords)
+            return func(*(args + fargs), **newkeywords)
+        newfunc.func = func
+        newfunc.args = args
+        newfunc.keywords = keywords
+        newfunc.__name__ = func.__name__
+        return newfunc
 class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
-
-    def replaceAll(self, search, replace, content):
-        """
-        Finds in all lines and replaces
-        """
-        find = re.compile(search, re.MULTILINE)
-
-        return find.sub(replace, content)
-
+    def __init__(self, *args, **kwargs):
+        super(WordpressReadmeToMarkdownCommand, self).__init__(*args, **kwargs) # Calls the parent constructor to maintain compatibilty
+        #Dictionary of replaces
+        titles = [
+                    ["""^(===)+(.+)+(===)\n""","""#\\2#\n"""],
+                    ["""^(==)+(.+)+(==)\n""","""##\\2##\n"""],
+                    ["""^(=)+(.+)+(=)\n""","""###\\2###\n"""]
+        self.titles = []
+        for search, replace in titles:
+            #Compiles the Expression    
+            reg = re.compile(search,re.MULTILINE)
+            
+            #Saves a partial object with call to re.sub preparatted
+            self.titles.append(partial(reg.sub, replace)) 
+        
+        other_replaces = {
+            """^([^:\n#]+): (.+)$""": """**\\1:** \\2  """
+        }
+        
+        self.other_replaces = {}
+        for search, replace in other_replaces.iteritems():
+            #Compiles the Expression    
+            reg = re.compile(search,re.MULTILINE)
+            
+            #Saves a partial object with call to re.sub preparatted
+            self.other_replaces[search] = partial(reg.sub, replace)
+            
+        #Compile and save the regex
+        self.plugin_slug = re.compile("""^=== (.+) ===\n""") 
+        self.plugin_screenshot = re.compile("""== Screenshots ==(.*?)==""", re.MULTILINE|re.DOTALL)
+        self.plugin_information = re.compile("""=== (.+) ===(.*?)==""", re.MULTILINE|re.DOTALL)
+        self.plugin_readme = re.compile("""(.+)/readme.txt$""")
     def getPluginSlug(self, content):
         """
         Gets the plugin slug
         """
-        findName = re.match("""^=== (.+) ===\n""", content)
+        findName = self.plugin_slug.match(content)
         slug = findName.group(1).replace(" ", "-")
 
         return slug.lower()
@@ -27,9 +63,8 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
         """
         Adds link to screenshots
         """
-        find = re.compile("""== Screenshots ==(.*?)==""", re.MULTILINE|re.DOTALL)
 
-        images = find.search(content)
+        images = self.plugin_screenshot.search(content)
 
         if images:
             for index, line in enumerate(images.group(1).strip().split("""\n""")):
@@ -43,12 +78,11 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
         """
         Parse Information section
         """
-        find = re.compile("""=== (.+) ===(.*?)==""", re.MULTILINE|re.DOTALL)
 
-        infos = find.search(content)
-
+        infos = self.plugin_information.search(content)
+        func = self.other_replaces[ """^([^:\n#]+): (.+)$"""]
         for info in infos.group(2).strip().split("""\n"""):
-            string = self.replaceAll("""^([^:\n#]+): (.+)$""", """**\\1:** \\2  """, info)
+            string = func(info)
             content = content.replace(info, string)
 
         return content
@@ -58,7 +92,7 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
         oldFile = self.view.file_name()
 
         # Checks if the file is the readme.txt
-        if re.search("""(.+)/readme.txt$""", oldFile):
+        if self.plugin_readme.search(oldFile):
 
             # Generate the README.md path
             newFile = '%s/README.md' % (os.path.dirname(oldFile))
@@ -79,9 +113,8 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
             content = self.parseScreenshots(content, slug)
 
             # Replaces the headings
-            content = self.replaceAll("""^(===)+(.+)+(===)\n""", """#\\2#\n""", content)
-            content = self.replaceAll("""^(==)+(.+)+(==)\n""", """##\\2##\n""", content)
-            content = self.replaceAll("""^(=)+(.+)+(=)\n""", """###\\2###\n""", content)
+            for func in self.titles:
+                content = func(content) #Simple, no?
 
             getContent.close()
 
