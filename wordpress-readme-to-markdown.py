@@ -1,25 +1,12 @@
-import sublime
 import sublime_plugin
 import os
 import shutil
 import re
-try:
-    from functools import partial
-except ImportError:
-    # fallback to < 2.5
-    def partial(func, *args, **keywords):
-        def newfunc(*fargs, **fkeywords):
-            newkeywords = keywords.copy()
-            newkeywords.update(fkeywords)
-            return func(*(args + fargs), **newkeywords)
+from functools import partial
 
-        newfunc.func = func
-        newfunc.args = args
-        newfunc.keywords = keywords
-        newfunc.__name__ = func.__name__
-        return newfunc
 
 class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
+
     def __init__(self, *args, **kwargs):
         super(WordpressReadmeToMarkdownCommand, self).__init__(*args, **kwargs) # Calls the parent constructor to maintain compatibilty
         # Dictionary of replaces
@@ -56,6 +43,7 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
         self.plugin_information = re.compile("""=== (.+) ===(.*?)==""", re.MULTILINE|re.DOTALL)
         self.plugin_readme = re.compile("""(.+)/readme.txt$""")
 
+
     def getPluginSlug(self, content):
         """
         Gets the plugin slug
@@ -64,6 +52,7 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
         slug = findName.group(1).replace(" ", "-")
 
         return slug.lower()
+
 
     def parseScreenshots(self, content, slug):
         """
@@ -80,6 +69,7 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
 
         return content
 
+
     def parseInformation(self, content):
         """
         Parse Information section
@@ -92,6 +82,7 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
             content = content.replace(info, string)
 
         return content
+
 
     def run(self, edit):
         # Get current file path
