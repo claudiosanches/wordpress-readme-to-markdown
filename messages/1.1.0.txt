@@ -1,0 +1,12 @@
+CHANGELOG - Word​Press Readme to Markdown v1.1.0
+===============================================
+
+## CHANGES/FIXES ##
+
+- Add support for Sublime Text 3
+
+## Support ##
+
+Please direct any feedback to https://github.com/claudiosmweb/wordpress-readme-to-markdown.
+
+Thank you for your support.

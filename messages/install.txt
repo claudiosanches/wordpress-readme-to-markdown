@@ -1,6 +1,9 @@
-# Sublime Text 2/3 - Wordpress Readme to Markdown #
+Word​Press Readme to Markdown
+============================
 
-Convert WordPress plugin readme files to markdown.
+Convert your WordPress readme.txt in a README.md to Github.
+
+Works with for Sublime Text 2 and 3.
 
 ## Features ##
 
@@ -18,7 +21,8 @@ Is ready, README.md created!
 
 Inspired by [WP-Readme-to-Github-Markdown](https://github.com/benbalter/WP-Readme-to-Github-Markdown).
 
-## License ##
+## Support ##
 
-Licensed under the MIT license.
-[License text](http://opensource.org/licenses/mit-license.php)
+Please direct any feedback to https://github.com/claudiosmweb/wordpress-readme-to-markdown.
+
+Thank you for your support.
