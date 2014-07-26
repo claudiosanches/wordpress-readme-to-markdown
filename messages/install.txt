@@ -1,6 +1,3 @@
-Word​Press Readme to Markdown
-============================
-
 Convert your WordPress readme.txt in a README.md to Github.
 
 Works with for Sublime Text 2 and 3.
