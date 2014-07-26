@@ -35,14 +35,8 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
             """^([^:\n#]+): (.+)$""": """**\\1:** \\2  """
         }
 
-        # Backward compatibility
-        try:
-        	_replaces = other_replaces.iteritems()
-        except AttributeError:
-        	_replaces = other_replaces.items()
-
         self.other_replaces = {}
-        for search, replace in _replaces:
+        for search, replace in other_replaces.items():
             # Compiles the Expression
             reg = re.compile(search,re.MULTILINE)
 
