@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# @Author: Claudio Sanches
+# @Author URL: http://claudiosmweb.com/
+# @Plugin URL: https://github.com/claudiosmweb/wordpress-readme-to-markdown
+# @License: MIT
 import sublime_plugin
 import os
 import shutil
@@ -29,8 +35,14 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
             """^([^:\n#]+): (.+)$""": """**\\1:** \\2  """
         }
 
+        # Backward compatibility
+        try:
+        	_replaces = other_replaces.iteritems()
+        except AttributeError:
+        	_replaces = other_replaces.items()
+
         self.other_replaces = {}
-        for search, replace in other_replaces.iteritems():
+        for search, replace in _replaces:
             # Compiles the Expression
             reg = re.compile(search,re.MULTILINE)
 
