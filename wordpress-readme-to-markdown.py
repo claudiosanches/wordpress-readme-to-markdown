@@ -70,7 +70,7 @@ class WordpressReadmeToMarkdownCommand(sublime_plugin.TextCommand):
         if images:
             for index, line in enumerate(images.group(1).strip().split("""\n""")):
                 content = content.replace(line, \
-                    """### %(name)s ###\n![%(name)s](http://s.wordpress.org/extend/plugins/%(slug)s/screenshot-%(index)s.png)\n""" \
+                    """### %(name)s ###\n![%(name)s](http://ps.w.org/%(slug)s/assets/screenshot-%(index)s.png)\n""" \
                     % {"name": line, "slug": slug, "index": index + 1})
 
         return content
