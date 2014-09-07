@@ -1,0 +1,12 @@
+CHANGELOG - Word​Press Readme to Markdown v1.2.0
+===============================================
+
+## CHANGES/FIXES ##
+
+- Updated the WordPress assets url to "http://ps.w.org/". Now works fine with the assets/ SVN directory.
+
+## Support ##
+
+Please direct any feedback to https://github.com/claudiosmweb/wordpress-readme-to-markdown.
+
+Thank you for your support.
