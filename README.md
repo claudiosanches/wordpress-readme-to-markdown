@@ -1,4 +1,4 @@
-# Sublime Text 2/3 - Wordpress Readme to Markdown #
+# Sublime Text 2/3 - WordPress Readme to Markdown #
 
 Convert WordPress plugin readme files to markdown.
 
