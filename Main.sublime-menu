@@ -3,8 +3,11 @@
         "id": "edit",
         "children":
         [
-            {"id": "wrap"},
-            { "command": "wordpress_readme_to_markdown" }
+            { "id": "wrap" },
+            {
+                "caption": "WordPress Readme to Markdown",
+                "command": "wordpress_readme_to_markdown"
+            }
         ]
     }
 ]
