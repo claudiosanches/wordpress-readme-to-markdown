@@ -10,5 +10,14 @@ class WordpressReadmeToMarkdownOnSave(sublime_plugin.EventListener):
     def on_post_save(self, view):
         name = view.file_name()
 
-        if self.plugin_readme.search(name):
+        if self.get_settings(view).get('on-save') and self.plugin_readme.search(name):
             view.window().run_command('wordpress_readme_to_markdown')
+
+    @staticmethod
+    def get_settings(view):
+        settings = view.settings().get('WordPressReadmeToMarkdown')
+
+        if settings is None:
+            settings = sublime.load_settings('WordPressReadmeToMarkdown.sublime-settings')
+
+        return settings

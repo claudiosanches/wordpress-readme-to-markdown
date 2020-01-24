@@ -1,0 +1,9 @@
+{
+    /**
+     * Run on save "readme.txt"
+     *
+     * As readme.txt is not a common file it's safe to allow it globally.
+     * Or you can just add this setting on project's settings.
+     */
+    "on-save" : false
+}
