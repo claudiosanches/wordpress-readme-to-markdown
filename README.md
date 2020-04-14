@@ -17,7 +17,7 @@ Is ready, README.md created!
 
 ## On Save ##
 
-Create `README.md` on saving `readme.txt` is disabld by default.
+Create `README.md` on saving `readme.txt` is disabled by default.
 
 You can enable it on `Preferences > Package Settings > WordPress Readme to Markdown > Settings - User` and add "on-save" to true.
 

@@ -1,0 +1,12 @@
+CHANGELOG - Word​Press Readme to Markdown v1.3.0
+===============================================
+
+## CHANGES/FIXES ##
+
+- Add a option to create "README.md" on saving "readme.txt". It's disabled by default. 
+
+## Support ##
+
+Please direct any feedback to https://github.com/claudiosmweb/wordpress-readme-to-markdown.
+
+Thank you for your support.
