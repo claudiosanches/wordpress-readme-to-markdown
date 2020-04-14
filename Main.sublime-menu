@@ -27,20 +27,14 @@
                         "children":
                         [
                             {
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/wordpress-readme-to-markdown/WordPressReadmeToMarkdown.sublime-settings"
-                                },
-                                "caption": "Settings – Default"
+                                "command": "edit_settings",
+                                "args":
+                                    {
+                                        "base_file": "${packages}/wordpress-readme-to-markdown/WordPressReadmeToMarkdown.sublime-settings",
+                                        "default": "// Settings in here override those in \"wordpress-readme-to-markdown/WordPressReadmeToMarkdown.sublime-settings\".\n{\n\t$0\n}\n"
+                                    },
+                                "caption": "Settings"
                             },
-                            {
-                                "command": "open_file",
-                                "args": {
-                                    "file": "${packages}/User/WordPressReadmeToMarkdown.sublime-settings"
-                                },
-                                "caption": "Settings – User"
-                            },
-                            { "caption": "-" },
                             {
                                 "command": "open_file",
                                 "args": {
