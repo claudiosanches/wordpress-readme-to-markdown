@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # @Author: Claudio Sanches
-# @Author URL: http://claudiosmweb.com/
-# @Plugin URL: https://github.com/claudiosmweb/wordpress-readme-to-markdown
+# @Author URL: http://claudiosanches.com/
+# @Plugin URL: https://github.com/claudiosanches/wordpress-readme-to-markdown
 # @License: MIT
 import sublime_plugin
 import os
