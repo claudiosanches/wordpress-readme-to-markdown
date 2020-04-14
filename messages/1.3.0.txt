@@ -7,6 +7,6 @@ CHANGELOG - Word​Press Readme to Markdown v1.3.0
 
 ## Support ##
 
-Please direct any feedback to https://github.com/claudiosmweb/wordpress-readme-to-markdown.
+Please direct any feedback to https://github.com/claudiosanches/wordpress-readme-to-markdown.
 
 Thank you for your support.
