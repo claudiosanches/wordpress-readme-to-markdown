@@ -30,7 +30,7 @@
                                 "command": "edit_settings",
                                 "args":
                                     {
-                                        "base_file": "${packages}/wordpress-readme-to-markdown/WordPressReadmeToMarkdown.sublime-settings",
+                                        "base_file": "${packages}/WordPress Readme to Markdown/WordPressReadmeToMarkdown.sublime-settings",
                                         "default": "// Settings in here override those in \"wordpress-readme-to-markdown/WordPressReadmeToMarkdown.sublime-settings\".\n{\n\t$0\n}\n"
                                     },
                                 "caption": "Settings"
@@ -38,7 +38,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/wordpress-readme-to-markdown/Default (OSX).sublime-keymap",
+                                    "file": "${packages}/WordPress Readme to Markdown/Default (OSX).sublime-keymap",
                                     "platform": "OSX"
                                 },
                                 "caption": "Key Bindings – Default"
@@ -46,7 +46,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/wordpress-readme-to-markdown/Default (Linux).sublime-keymap",
+                                    "file": "${packages}/WordPress Readme to Markdown/Default (Linux).sublime-keymap",
                                     "platform": "Linux"
                                 },
                                 "caption": "Key Bindings – Default"
@@ -54,7 +54,7 @@
                             {
                                 "command": "open_file",
                                 "args": {
-                                    "file": "${packages}/wordpress-readme-to-markdown/Default (Windows).sublime-keymap",
+                                    "file": "${packages}/WordPress Readme to Markdown/Default (Windows).sublime-keymap",
                                     "platform": "Windows"
                                 },
                                 "caption": "Key Bindings – Default"
